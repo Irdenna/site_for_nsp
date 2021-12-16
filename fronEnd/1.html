@@ -1,0 +1,135 @@
+<!doctype html>
+<html>
+<title>Example</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sofia">
+<head>
+<style>
+img {
+ display: block;
+ margin: 10px;
+ border: 1px solid green;
+ padding: .5rem;
+ border-radius: 1rem;
+ box-shadow: 3px 3px 8px 0px rgba(0,0,0,0.3);
+ max-width: 20vw;
+ }
+.button {
+ background-color: #4CAF50; /* Green */
+ border: none;
+ color: white;
+ padding: 15px 32px;
+ text-align: center;
+ text-decoration: none;
+ display: inline-block;
+ font-size: 12px;
+ border-radius: 16px;
+ transition-duration: 0.4s;
+ cursor: pointer;
+ box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+}
+.button:hover {
+ background-color: red;
+ color: white;
+}
+.styled-table {
+ border-collapse: collapse;
+ box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+ width: 60%;
+ border-spacing: 0px;
+}
+.styled-table img{
+ width: 15vw;
+ height: 10vw;
+}
+td{
+ padding: 10px 2px 2px 5px ;
+}
+#demo {
+ font-family: "Sofia", sans-serif;
+ font-size: 30px;
+ color: blue;
+}
+td[colspan="3"] {
+text-align: center;
+}
+</style>
+<script>
+var flag=new Array();
+window.onload = function() {
+for (var i = 0; i < document.images.length; i++) flag[i]=false;
+for (var i = 0; i < document.images.length; i++) {
+ var image = document.images[i];
+ image.setAttribute("index", i + "");
+ image.onclick = function() {
+ var index = this.getAttribute("index");
+if(!flag[index]) {document.images[index].style.border="2px solid red"; flag[index]=true;}
+ else {document.images[index].style.border="1px solid green"; flag[index]=false;}
+ };
+ }
+};
+
+function shuffle(array) {// шафлим массив по Кнуту, НП точно оценим
+  let currentIndex = array.length,  randomIndex;
+
+  // While there remain elements to shuffle...
+  while (currentIndex != 0) {
+
+    // Pick a remaining element...
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex--;
+
+    // And swap it with the current element.
+    [array[currentIndex], array[randomIndex]] = [
+      array[randomIndex], array[currentIndex]];
+  }
+
+  return array;
+}
+
+function randomImg() {
+ myImages = new Array();
+ var arrayToShuffle = [0,1,2,3,4,5];
+ arrayToShuffle = shuffle(arrayToShuffle);
+ 
+ myImages[0] = "images/1.jpg";
+ myImages[1] = "images/2.jpg";
+ myImages[2] = "images/3.gif";
+ myImages[3] = "images/4.jpg";
+ myImages[4] = "images/5.jpg";
+ myImages[5] = "images/6.jpg";
+ 
+//alert(document.images.length);
+//document.images[0].src="images/santa8.jpg";
+//document.images[1].src=myImages1[5];
+for (var i = 0; i < document.images.length; i++) {
+
+document.images[i].style.border="1px solid green";
+document.images[i].src=myImages[arrayToShuffle[i]]; // штукаа чтоб не повторялись картинки
+}
+}
+</script>
+</head>
+<body>
+<table class="styled-table" align="center">
+<tr>
+ <td colspan="3">
+ <div id="demo">HAPPY NEW YEAR !</div>
+ </td>
+</tr>
+<tr>
+ <td ><img src="images/1.jpg" /></td>
+ <td ><img src="images/2.jpg" /></td>
+ <td ><img src="images/3.gif" /></td>
+ </tr>
+<tr>
+ <td ><img src="images/4.jpg" /></td>
+ <td ><img src="images/5.jpg" /></td>
+ <td ><img src="images/6.jpg"/></td>
+</tr>
+
+</table>
+<center>
+ <input type="button" class="button" value="Change Image" onclick="randomImg()"/>
+</center>
+</body>
+</html>
